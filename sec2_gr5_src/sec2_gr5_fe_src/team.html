@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <title>Team - Art Comm</title>
+
+  <style>
+    /* Navigation */
+    html,
+    body {
+      height: 100%;
+      position: relative;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background:
+        linear-gradient(rgba(240, 240, 240, 0.6), rgba(240, 240, 240, 0.99)),
+        url("image/background.png");
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    header {
+      background-color: #9cd0c0c5;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .nav-icons a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .nav-icons a:hover {
+      color: inherit;
+    }
+
+
+    .nav-container {
+
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+
+      justify-content: center;
+      margin: 0 auto;
+      line-height: 0.6;
+    }
+
+
+
+
+    .logo-top {
+      display: block;
+      font-weight: 600;
+      justify-content: left;
+      align-items: left;
+    }
+
+    .logo-bottom {
+      display: block;
+      font-weight: 800;
+      justify-content: left;
+      align-items: left;
+
+    }
+
+
+    .menu-btn,
+    .close-btn {
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-icons button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 0 5px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: -250px;
+      top: 0;
+      width: 250px;
+      height: 100%;
+      background: #dcd6f7;
+      transition: 0.3s;
+      padding-top: 2rem;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 1rem;
+    }
+
+    .sidebar ul li {
+      padding: 10px;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+
+    .team {
+      text-align: left;
+      padding: 7rem 2rem;
+
+
+    }
+
+
+
+
+    .team h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      padding-left: 10px;
+      border-left: 5px solid black;
+    }
+
+    .team-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 20px;
+    }
+
+    .team-member {
+      background: #E3A93C;
+      padding: 15px;
+      border-radius: 20px;
+      text-align: center;
+      width: 200px;
+      height: 320px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-member img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .team-member .id {
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+
+    .team-member h3 {
+      font-size: 1rem;
+      margin-top: 5px;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      /* Slightly rounded corners, or 0 for sharp corners */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      /* position: absolute;  Remove absolute positioning */
+      /* bottom: 10px;     Remove bottom positioning */
+      /* left: 50%;        Remove left positioning */
+      /* transform: translateX(-50%); Remove transform */
+      margin-top: 10px;
+      /* Add space between text and icon */
+    }
+
+    .social-icon img {
+      width: 24px;
+      height: 24px;
+      border-radius: 0;
+      /* Ensure the image inside is also not rounded */
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="d-flex align-items-center justify-content-between px-3">
+    <button class="menu-btn" onclick="toggleMenu()"><i class="bi bi-list"></i></button>
+    <div class="logo-wrapper">
+      <h1 class="logo">
+        <span class="logo-top">ART</span>
+        <span class="logo-bottom">COMM.</span>
+      </h1>
+    </div>
+
+    <div class="nav-icons d-flex align-items-center">
+      <button><a href="/search"><i class="bi bi-search"></i></a></button>
+      <h4>|</h4>
+      <div class="dropdown">
+        <button class="btn btn-outline-dark" type="button" id="langDropdown" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          EN
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="langDropdown">
+          <li><a class="dropdown-item lang-option" data-lang="en" href="#">English (EN)</a></li>
+          <li><a class="dropdown-item lang-option" data-lang="th" href="#">Thai (TH)</a></li>
+        </ul>
+      </div>
+      <button><i class="bi bi-heart-half"></i></button>
+      <button><i class="bi bi-envelope-fill"></i></button>
+      <button class="bi bi-person-circle dropdown-toggle" aria-expanded="false">
+      </button>
+  </header>
+
+  <!-- Sidebar Menu -->
+  <aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="toggleMenu()"></button>
+    <ul>
+      <li><a href="/home" data-en="HOME" data-th="หน้าแรก">HOME</a></li>
+      <li><a href="/product" data-en="PRODUCT&SERVICE" data-th="สินค้าและบริการ">PRODUCT&SERVICE</a></li>
+      <li><a href="/team" data-en="TEAM" data-th="ทีม">TEAM</a></li>
+    </ul>
+  </aside>
+
+  <!-- Staff Team Section -->
+  <section class="team">
+    <h2 data-en="STAFF TEAM" data-th="ทีม"> STAFF TEAM</h2>
+    <div class="team-container">
+
+
+
+      <div class="team-member">
+        <img src="image/franc.png" alt="Jiaxian Chen">
+        <p class="id">6388165</p>
+        <h3>Jiaxian <br> Chen</h3>
+        <a href="https://www.facebook.com/share/1Y2jwisVCM/?mibextid=wwXIfr" target="_blank" class="social-icon">
+          <img src="image/fb.png" alt="Facebook">
+        </a>
+      </div>
+
+      <div class="team-member">
+        <img src="image/pim.jpg" alt="Thanaporn Artidtayamontol">
+        <p class="id">6688005</p>
+        <h3>Thanaporn <br> Artidtayamontol</h3>
+        <a href="https://www.instagram.com/ducartoon?igsh=cWF5eWxnZ2xudHVp" target="_blank" class="social-icon">
+          <img src="image/ig.png" alt="Instagram">
+        </a>
+      </div>
+
+      <div class="team-member">
+        <img src="image/kaimo.jpg" alt="Rawisara Chantravutikorn">
+        <p class="id">6688015</p>
+        <h3>Rawisara <br> Chantravutikorn</h3>
+        <a href="https://www.instagram.com/rcpearl?igsh=MWR0YWx2eTFwcm96" target="_blank" class="social-icon">
+          <img src="image/ig.png" alt="Instagram">
+        </a>
+      </div>
+
+      <div class="team-member">
+        <img src="image/tt.jpg" alt="Teerada Chatrattanawuth">
+        <p class="id">6688016</p>
+        <h3>Teerada <br> Chatrattanawuth</h3>
+        <a href="https://www.instagram.com/wannasleep.43?igsh=ZnZmMXZwNXE4ajRy" target="_blank" class="social-icon">
+          <img src="image/ig.png" alt="Instagram">
+        </a>
+      </div>
+
+      <div class="team-member">
+        <img src="image/palm.jpg" alt="Nichakorn Wisalkamol">
+        <p class="id">6688146</p>
+        <h3>Nichakorn <br> Wisalkamol</h3>
+        <a href="https://www.instagram.com/_p__almnijie?igsh=MXN2dGY4MmNyOXFlbA==" target="_blank" class="social-icon">
+          <img src="image/ig.png" alt="Instagram">
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <script type="text/javascript" src="/js/script.js"></script>
+</body>
+
+</html>

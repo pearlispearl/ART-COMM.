@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Comm</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Preahvihear&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background:
+        linear-gradient(rgba(240, 240, 240, 0.6), rgba(240, 240, 240, 0.99)),
+        url("image/background.png");
+      background-size: cover;
+      background-attachment: fixed;
+      width: 100%;
+    }
+
+    /* Navigation */
+    header {
+      background-color: #9cd0c0c5;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .nav-icons a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .nav-icons a:hover {
+      color: inherit;
+    }
+
+
+    .nav-container {
+
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+
+      justify-content: center;
+      margin: 0 auto;
+      line-height: 0.6;
+    }
+
+
+
+
+    .logo-top {
+      display: block;
+      font-weight: 600;
+      justify-content: left;
+      align-items: left;
+    }
+
+    .logo-bottom {
+      display: block;
+      font-weight: 800;
+      justify-content: left;
+      align-items: left;
+
+    }
+
+
+    .menu-btn,
+    .close-btn {
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+
+    }
+
+    .nav-icons button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 0 5px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: -250px;
+      top: 0;
+      width: 250px;
+      height: 100%;
+      background: #dcd6f7;
+      transition: 0.3s;
+      padding-top: 2rem;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 1rem;
+    }
+
+    .sidebar ul li {
+      padding: 10px;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .sidebar.active {
+      left: 0;
+      z-index: 100;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      /* Add this line */
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* z-index: -1; */
+
+      color: black;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(to top, white 0%, rgba(255, 255, 255, 0) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+
+    .overlay {
+
+      padding: 8rem;
+      border-radius: 10px;
+
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      margin: 30px 0;
+    }
+
+    .hero p1 {
+      font-size: 1.2rem;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .hero p {
+      font-size: 1 rem;
+      margin: 30px 0;
+    }
+
+    .Goback-btn {
+      background: #224f56;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      display: block;
+      margin: 0 auto;
+
+    }
+
+    .Goback-btn:hover {
+
+      background: #1c3e46;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="d-flex align-items-center justify-content-between px-3">
+    <button class="menu-btn" onclick="toggleMenu()"><i class="bi bi-list"></i></button>
+    <div class="logo-wrapper">
+      <h1 class="logo">
+        <span class="logo-top">ART</span>
+        <span class="logo-bottom">COMM.</span>
+      </h1>
+    </div>
+
+    <div class="nav-icons d-flex align-items-center">
+      <button><a href="/search"><i class="bi bi-search"></i></a></button>
+      <h4>|</h4>
+      <div class="dropdown">
+        <button class="btn btn-outline-dark " type="button" id="langDropdown" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          EN
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="langDropdown">
+          <li><a class="dropdown-item lang-option" data-lang="en" href="#">English (EN)</a></li>
+          <li><a class="dropdown-item lang-option" data-lang="th" href="#">Thai (TH)</a></li>
+        </ul>
+      </div>
+
+      <button><i class="bi bi-heart-half"></i></button>
+      <button><i class="bi bi-envelope-fill"></i></button>
+      <button class="bi bi-person-circle dropdown-toggle" aria-expanded="false">
+      </button>
+    </div>
+  </header>
+
+  <!-- Sidebar Menu -->
+  <aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="toggleMenu()"></button>
+    <ul>
+      <li><a href="/home" data-en="HOME" data-th="หน้าแรก">HOME</a></li>
+      <li><a href="/product" data-en="PRODUCT&SERVICE" data-th="สินค้าและบริการ">PRODUCT&SERVICE</a></li>
+      <li><a href="/team" data-en="TEAM" data-th="ทีม">TEAM</a></li>
+    </ul>
+  </aside>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="overlay">
+      <div class="logo-wrapper">
+        <h1 class="logo">
+          <span class="logo-top">ART</span>
+          <span class="logo-bottom">COMM.</span>
+        </h1>
+      </div>
+      <p1><em>[a:t komm]: noun</em></p1>
+      <p id="hero-text"
+        data-en="A platform that connects artists who want to showcase their unique art styles with customers looking to commission their favorite creators. Serving as a bridge between both parties, our admin team facilitates seamless communication, making the commissioning process easy, secure, and hassle-free."
+        data-th="แพลตฟอร์มที่เชื่อมโยงศิลปินผู้มีสไตล์ศิลปะเฉพาะตัวกับลูกค้าที่ต้องการสั่งจ้างผลงานจากศิลปินที่ชื่นชอบ เราช่วยอำนวยความสะดวกในการสื่อสารระหว่างทั้งสองฝ่าย ทำให้กระบวนการสั่งจ้างง่าย ปลอดภัย และไร้ความยุ่งยาก">
+        <em>A platform that connects artists who want to showcase their unique art styles with customers looking to
+          commission their favorite creators. Serving as a bridge between both parties, our admin team facilitates
+          seamless communication, making the commissioning process easy, secure, and hassle-free.</em>
+      </p>
+      <a href="/product" style="text-decoration: none; color: inherit;">
+        <button class="Goback-btn" data-en="Go back to Product and Service" data-th="ไปหน้าสินค้าและบริการ">
+          Go back to Product and Service
+        </button>
+      </a>
+    </div>
+  </section>
+  <script type="text/javascript" src="/js/script.js"></script>
+
+</body>
+
+</html>

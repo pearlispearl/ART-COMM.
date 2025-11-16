@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Details - ArtComm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <!-- edit/delete font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Preahvihear&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Preahvihear&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejugothic.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <!-- nav-bar -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        header {
+            background-color: #9cd0c0c5;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-icons a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .nav-icons a:hover {
+            color: inherit;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 auto;
+            line-height: 0.6;
+        }
+
+        .logo-top {
+            display: block;
+            font-weight: 600;
+            justify-content: left;
+            align-items: left;
+        }
+
+        .logo-bottom {
+            display: block;
+            font-weight: 800;
+            justify-content: left;
+            align-items: left;
+        }
+
+        .menu-btn,
+        .close-btn {
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-icons button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0 5px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background: #dcd6f7;
+            transition: 0.3s;
+            padding-top: 2rem;
+            z-index: 900;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 1rem;
+        }
+
+        .sidebar ul li {
+            padding: 10px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+    </style>
+    <style>
+        body {
+            background:
+                linear-gradient(rgba(240, 240, 240, 0.6), rgba(240, 240, 240, 0.99)),
+                url("image/background.png");
+            background-size: cover;
+            background-attachment: fixed;
+            width: 100%;
+        }
+
+        .preahvihear {
+            font-family: 'Preahvihear', sans-serif;
+        }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 85%;
+            margin: 0 auto;
+            gap: 1.5rem;
+        }
+
+        .form-control {
+            width: 105px;
+            font-size: 18px;
+            display: inline-block;
+            padding: 4px;
+
+            color: none;
+            border: none;
+            background-color: transparent;
+            opacity: 70%;
+            border-radius: 28px;
+        }
+
+        .frame-text {
+            padding: 10px;
+            background-color: #FBF5DD;
+            font-size: 16px;
+            box-sizing: border-box;
+
+        }
+
+        .info {
+            display: inline-block;
+        }
+        .left-column {
+            flex: 0 0 58%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: -2rem;
+        }
+
+        .right-column {
+            flex: 0 0 40%;
+            margin-left: 1rem;
+            margin-top: -3rem;
+            margin-bottom: auto;
+        }
+
+        /* Profile卡片 */
+        .profile-card {
+            padding: 2rem;
+            border-radius: 20px;
+            width: 600px;
+        }
+
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            background: #ddd;
+            border-radius: 50%;
+        }
+
+        .info h2 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .location,
+        .about-me {
+            margin-top: 0.5rem;
+        }
+
+        .skills-title {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: #9EE3D7;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            border: 1px solid black;
+            width: 171px;
+            height: 58px;
+        }
+
+        .category-tag {
+            background: #9EE3D7;
+            padding-top: 2px;
+            border-radius: 2rem;
+            border: 1px solid black;
+            width: 86px;
+            height: 29px;
+            text-align: center;
+
+        }
+
+        .works-title {
+            margin-top: -10px;
+            font-size: 1.8rem;
+        }
+
+        .works-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 0rem;
+        }
+
+        .image-upload {
+            width: 324px;
+            height: 216px;
+            background-color: #B4DBD4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        #plusButton {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #263238;
+            color: white;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .category-blocks {
+            display: flex;
+            margin-left: 10px;
+        }
+
+        .category-blocks .category-block {
+            background-color: #a5d8ef;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin-left: 5px;
+        }
+
+        .work-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            width: 300px;
+            text-align: center;
+        }
+
+        .work-card img {
+            width: 100%;
+            border-radius: 1rem;
+        }
+
+        .price {
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+
+        /* Price List */
+        .price-list {
+            background: rgba(255, 184, 108, 0.8);
+            border-radius: 1rem;
+            padding: 7dvi 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            margin-top: 90px;
+            width: 500.8px;
+            height: 100px;
+            padding-top: 30px;
+        }
+
+        .pricelist-table,
+        .information-section {
+            padding-top: 70px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .table-row {
+            display: flex;
+            background-color: #F3F0D0;
+            opacity: 62%;
+        }
+
+        .table-cell {
+            flex: 1;
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        .table-cell input {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #addRow {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background-color: #263238;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .price-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            margin-top: auto;
+        }
+
+        .background-title {
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .background-note {
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 0.2rem;
+        }
+
+        .information-section h2 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .information-box {
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .information-box textarea {
+            width: 100%;
+            height: 200px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            background-color: #FFF9E8;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+            padding-right: 40px;
+            padding-bottom: 20px;
+        }
+
+        .edit-button,
+        .delete-button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            width: 241px;
+            height: 56px;
+
+
+        }
+
+        .edit-button {
+            background-color: #6DD3C0;
+            color: #FFFFFF;
+            font: 1em sans-serif;
+            border: none;
+
+        }
+
+        .delete-button {
+            background-color: #DCA854;
+            color: #858585;
+            font: 1em sans-serif;
+            border: none;
+        }
+
+        .edit-button:active,
+        .delete-button:active {
+            border: 1px solid black;
+        }
+
+        .edit-button[data-th="แก้ไข"],
+        .delete-button[data-th="ลบ"] {
+            padding-top: 8px;
+            text-align: center;
+            line-height: 56px;
+        }
+
+        .currency-converter {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .convert-btn {
+            background-color: #9EE3D7;
+            border: 1px solid black;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-family: 'Preahvihear', sans-serif;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+
+        .convert-btn:hover {
+            background-color: #7dd0c4;
+        }
+
+        .thb-price {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+    </style>
+
+
+
+
+</head>
+
+<body class="bg-light py-4">
+    <!-- Navigation Bar -->
+    <header class="d-flex align-items-center justify-content-between px-3">
+        <button class="menu-btn" onclick="toggleMenu()"><i class="bi bi-list"></i></button>
+        <div class="logo-wrapper">
+            <h1 class="logo">
+                <span class="logo-top">ART</span>
+                <span class="logo-bottom">COMM.</span>
+            </h1>
+        </div>
+
+        <div class="nav-icons d-flex align-items-center">
+            <button><a href="/search"><i class="bi bi-search"></i></a></button>
+            <h4>|</h4>
+            <div class="dropdown">
+                <button class="btn btn-outline-dark" type="button" id="langDropdown" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    EN
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="langDropdown">
+                    <li><a class="dropdown-item lang-option" data-lang="en" href="#">English (EN)</a></li>
+                    <li><a class="dropdown-item lang-option" data-lang="th" href="#">Thai (TH)</a></li>
+                </ul>
+            </div>
+            <button><i class="bi bi-heart-half"></i></button>
+            <button><i class="bi bi-envelope-fill"></i></button>
+            <button class="bi bi-person-circle dropdown-toggle" aria-expanded="false">
+            </button>
+    </header>
+
+    <!-- Sidebar Menu -->
+    <aside class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="toggleMenu()"></button>
+        <ul>
+            <li><a href="/home" data-en="HOME" data-th="หน้าแรก">HOME</a></li>
+            <li><a href="/product" data-en="PRODUCT&SERVICE" data-th="สินค้าและบริการ">PRODUCT&SERVICE</a></li>
+            <li><a href="/team" data-en="TEAM" data-th="ทีม">TEAM</a></li>
+        </ul>
+    </aside>
+    <section class="content-wrapper preahvihear" style="margin-top: 60px;">
+        <!-- 左边整体 -->
+        <div class="left-column">
+            <section class="profile-container">
+
+                <div class="profile-card">
+                    <div class="profile">
+                        <div class="avatar">
+                            <img src="/image/User.png" alt="User Avatar"
+                                style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+                        </div>
+                        <div class="info">
+                            <span id="artistName"
+                                style="  padding-left: 5px; font-size: 30px; "></span>
+                            <span
+                                style=" display: inline-block; padding-left: 5px; font-size: 30px;">ID:</span>
+                            <span class="ArtistID" id="artistID"></span><br>
+                            <span class="bi bi-geo-alt fs-3 "> </span>
+                            <span id="artistCountry"
+                                style=" float: none; padding-right: 20px; " class="country-text" data-country=""></span>
+                            <span class="bi bi-chat-text fs-3  " style="margin-right: 5px;"></span><span style=" float: none; margin-top: 5px;  " id="artistLanguage"
+                                class="language-text" data-language=""></span><br>
+                            <span class="fs-10" style="padding-right: 5px; margin-top: 5px;"> Status:
+                            </span><span id="artistStatus" style="display: inline-block; 
+                      "></span></p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div style="max-width: 600px; padding-top: 10px; position: relative;">
+                    <textarea class="form-control frame-text" id="artistAboutMe"
+                        style="height: 120px; width: 570px; border: 1px solid #ccc; border-radius: 5px; padding: 40px 8px 8px 8px; box-sizing: border-box; font-family: sans-serif; position: start;">
+                        </textarea>
+                    <span
+                        style="position: absolute; top: 8px; left: 8px; font-weight: bold; color: #000000; font-size: 32px;"
+                        data-en="About me" data-th="เกี่ยวกับฉัน">About
+                        me:</span>
+
+                </div>
+
+
+                <h3 class="category-title" style="font-size: 40px;" data-en="Category" data-th="ประเภท">Category</h3>
+                <div class="category" style="text-align: center;">
+                    <div class=" fs-5 skill-tag" style="color: #326373; cursor: pointer; padding-top: 9px; "
+                        id="artistCategory">
+
+                        <div id="container" style="display: inline-flex; gap: 8px; "></div>
+
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="works">
+                <h3 class="works-title" style="font-size: 40px;" data-en="My Works" data-th="ผลงาน">My Works</h3>
+
+                <!-- Images + Upload Button Wrapper -->
+                <img id="artist-photo" alt="Artist Photo" style="width:324px ; height: 216; border-radius: 8px;">
+            </section>
+        </div>
+
+        <!-- 右边 PriceList -->
+
+        <div class="right-column">
+            <section class="price-list">
+                <div class="table-row header-row">
+                    <div class="table-cell" data-en="base price" data-th="ราคาเริ่มต้น">base price</div>
+                    <div class="table-cell" id="artistBaseprice">
+                    </div>
+                    <div class="currency-converter">
+                        <button id="convert-to-thb" class="convert-btn" data-en="Convert to THB"
+                            data-th="แปลงเป็นเงินบาท">Convert to THB</button>
+                        <div id="thb-price" class="thb-price"></div>
+                    </div>
+            </section>
+            <div class="button-container">
+                <button class="edit-button" id="edit-button"
+                    style="--bs-body-font-family: 'Roboto', sans-serif;font-weight: bold;font-size: 48px; margin-top: 20px; padding-bottom: 60px;"
+                    data-en="Edit" data-th="แก้ไข">Edit</button>
+                <button class="delete-button" id="delete-button"
+                    style="--bs-body-font-family: 'Roboto', sans-serif;font-weight: bold;font-size: 48px; margin-top: 20px; padding-bottom: 60px;"
+                    data-en="Delete" data-th="ลบ">Delete</button>
+            </div>
+        </div>
+
+    </section>
+    <div id="edit-form-container"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:2000;">
+        <div
+            style="background:white; width:80%; max-width:600px; margin:50px auto; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
+            <h2 data-en="Edit Artist" data-th="แก้ไขข้อมูล">Edit Artist</h2>
+            <form id="edit-artist-form">
+                <div class="mb-3">
+                    <label for="edit-name" class="form-label" data-en="Name:" data-th="ชื่อ:">Name:</label>
+                    <input type="text" class="form-control" id="edit-name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-language" class="form-label" data-en="Language:" data-th="ภาษา:">Language:</label>
+                    <input type="text" class="form-control" id="edit-language" required>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-country" class="form-label" data-en="Country:" data-th="ประเทศ:">Country:</label>
+                    <input type="text" class="form-control" id="edit-country" required>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-about-me" class="form-label" data-en="About Me:" data-th="เกี่ยวกับฉัน:">About
+                        Me:</label>
+                    <textarea class="form-control" id="edit-about-me" rows="2" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-category" class="form-label" data-en="Category:"
+                        data-th="ประเภท:">Category:</label>
+                    <select class="form-control" id="edit-category" required>
+                        <option value="CAT000000001">Anime Style</option>
+                        <option value="CAT000000002">Realism</option>
+                        <option value="CAT000000003">Cartoon</option>
+                        <option value="CAT000000004">Pixel Art</option>
+                        <option value="CAT000000005">Chibi</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-baseprice" class="form-label" data-en="Base Price:" data-th="ราคาเริ่มต้น:">Base
+                        Price:</label>
+                    <input type="number" class="form-control" id="edit-baseprice" required>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-photo-url" class="form-label">Photo URL:</label>
+                    <input type="text" class="form-control" id="edit-photo-url">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" style="background-color: #9cd0c0;" id="edit-status">
+                    <label class="form-check-label" for="edit-status">Available</label>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary me-2" id="cancel-edit" data-en="Cancel"
+                        data-th="ยกเลิก">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="background-color: #6DD3C0; border: none;"
+                        data-en="Save Changes" data-th="บันทึก">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/script.js"></script>
+</body>
+
+</html>

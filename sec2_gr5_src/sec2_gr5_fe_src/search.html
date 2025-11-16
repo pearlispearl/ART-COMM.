@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <title>Search - ArtComm</title>
+
+    <style>
+        header {
+            background-color: #9cd0c0c5;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-icons a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .nav-icons a:hover {
+            color: inherit;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 auto;
+            line-height: 0.6;
+        }
+
+        .logo-top {
+            display: block;
+            font-weight: 600;
+            justify-content: left;
+            align-items: left;
+        }
+
+        .logo-bottom {
+            display: block;
+            font-weight: 800;
+            justify-content: left;
+            align-items: left;
+        }
+
+        .menu-btn,
+        .close-btn {
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-icons button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0 5px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background: #dcd6f7;
+            transition: 0.3s;
+            padding-top: 2rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 1rem;
+        }
+
+        .sidebar ul li {
+            padding: 10px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        body {
+            background:
+                linear-gradient(rgba(240, 240, 240, 0.6), rgba(240, 240, 240, 0.99)),
+                url("image/background.png");
+            background-size: cover;
+            background-attachment: fixed;
+            width: 100%;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 30px 40px;
+        }
+
+        section {
+            margin-bottom: 25px;
+        }
+
+        .search-filter {
+            display: inline-block;
+            width: 35%;
+            background-color: #a6cdc6;
+            padding: 12px 15px;
+            font-weight: bold;
+            font-size: 16px;
+            vertical-align: middle;
+        }
+
+        select,
+        input[type="text"] {
+            width: 80%;
+            height: 48px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-left: none;
+            border-radius: 0 8px 8px 0;
+            outline: none;
+            vertical-align: middle;
+            margin-bottom: 10px;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        label input[class="status-btn"] {
+            width: auto;
+        }
+
+        /* Add active styling when the radio is selected */
+        input[type="radio"]:checked+.status-btn {
+            width: auto;
+            display: inline;
+            border: 2px solid #000;
+            background-color: #fcbf49;
+        }
+
+        /* Action Buttons */
+        button[type="submit"],
+        button[type="reset"] {
+            width: 140px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 15px 0 0;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        button[type="submit"] {
+            background-color: #82d2ca;
+        }
+
+        button[type="reset"] {
+            background-color: #d9a760;
+        }
+
+        #input-section {
+            display: flex;
+            align-items: start;
+            justify-content: start;
+        }
+
+        /* Responsive tweak */
+        @media (max-width: 600px) {
+
+            label,
+            select,
+            input[type="text"] {
+                width: 100%;
+                display: block;
+                border-radius: 8px;
+            }
+
+            label {
+                margin-bottom: 5px;
+                border-radius: 8px;
+            }
+
+            button[type="submit"],
+            button[type="reset"] {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+        /* status button*/
+        .status-section {
+            margin-top: 20px;
+        }
+
+        .status-label {
+            display: inline-block;
+            width: 43%;
+            background-color: #a6cdc6;
+            padding: 12px 20px;
+            font-weight: bold;
+            font-size: 16px;
+            vertical-align: middle;
+        }
+
+        .status-option {
+            display: inline-block;
+            background-color: #fcd28d;
+            border: 1px solid #d6a760;
+            padding: 10px 25px;
+            border-radius: 12px;
+            margin-right: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        input[type="radio"]:checked+.status-option {
+            background-color: #fcbf49;
+            border: 2px solid black;
+        }
+
+        .status-btn-group {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header class="d-flex align-items-center justify-content-between px-3">
+        <button class="menu-btn" onclick="toggleMenu()"><i class="bi bi-list"></i></button>
+        <div class="logo-wrapper">
+            <h1 class="logo">
+                <span class="logo-top">ART</span>
+                <span class="logo-bottom">COMM.</span>
+            </h1>
+        </div>
+
+        <div class="nav-icons d-flex align-items-center">
+            <button><a href="/search"><i class="bi bi-search"></i></a></button>
+            <h4>|</h4>
+            <div class="dropdown">
+                <button class="btn btn-outline-dark" type="button" id="langDropdown" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    EN
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="langDropdown">
+                    <li><a class="dropdown-item lang-option" data-lang="en" href="#">English (EN)</a></li>
+                    <li><a class="dropdown-item lang-option" data-lang="th" href="#">Thai (TH)</a></li>
+                </ul>
+            </div>
+            <button><i class="bi bi-heart-half"></i></button>
+            <button><i class="bi bi-envelope-fill"></i></button>
+            <button class="bi bi-person-circle dropdown-toggle" aria-expanded="false">
+            </button>
+    </header>
+
+    <!-- Sidebar Menu -->
+    <aside class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="toggleMenu()"></button>
+        <ul>
+            <li><a href="/home" data-en="HOME" data-th="หน้าแรก">HOME</a></li>
+            <li><a href="/product" data-en="PRODUCT&SERVICE" data-th="สินค้าและบริการ">PRODUCT&SERVICE</a></li>
+            <li><a href="/team" data-en="TEAM" data-th="ทีม">TEAM</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <form id="searchForm" action="/form-submit" method="POST">
+            <section id="input-section">
+                <span class="search-filter text-center" data-en="Category" data-th="ประเภท">Category</span>
+                <select name="Categories" id="category">
+                    <option value="All">All</option>
+                    <option value="Anime Style">Anime Style</option>
+                    <option value="Realism">Realism</option>
+                    <option value="Cartoon">Cartoon</option>
+                    <option value="Pixel Art">Pixel Art</option>
+                    <option value="Chibi">Chibi</option>
+                </select><br>
+            </section>
+            <section id="input-section">
+                <span class="search-filter text-center" for="txtArtist" data-en="Artist" data-th="ชื่อ">Artist</span>
+                <input type="text" name="Artist" id="name" placeholder="Enter artist name..." autocomplete="name">
+            </section>
+
+            <section id="input-section">
+                <span class="search-filter text-center" for="txtBasePrice" data-en="BasePrice"
+                    data-th="ราคาเริ่มต้น">BasePrice</span>
+                <input type="text" name="BasePrice" id="baseprice" placeholder="Enter base price...">
+            </section>
+
+            <section class="status-section d-flex align-items-center">
+                <div class="status-label text-center">Status</div>
+                <div class="ms-3 status-btn-group">
+                    <input type="radio" id="available" name="Status" value="Show available" checked hidden>
+                    <label for="available" class="status-option">Show available</label>
+
+                    <input type="radio" id="all" name="Status" value="Show all" hidden>
+                    <label for="all" class="status-option">Show all</label>
+                </div>
+            </section>
+
+
+        </form>
+        <div>
+            <button type="submit" class="search-button" id="btnSearch" data-en="Search" data-th="ค้นหา">Search</button>
+            <button type="reset" class="search-button" id="btnClear" data-en="Clear" data-th="ลบ">Clear</button>
+        </div>
+
+    </main>
+    <div id="output"></div><script type="text/javascript" src="/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - ArtComm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <!-- edit/delete font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Preahvihear&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Preahvihear&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejugothic.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <!-- nav-bar -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        header {
+            background-color: #9cd0c0c5;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-icons a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .nav-icons a:hover {
+            color: inherit;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 auto;
+            line-height: 0.6;
+        }
+
+        .logo-top {
+            display: block;
+            font-weight: 600;
+            justify-content: left;
+            align-items: left;
+        }
+
+        .logo-bottom {
+            display: block;
+            font-weight: 800;
+            justify-content: left;
+            align-items: left;
+        }
+
+        .menu-btn,
+        .close-btn {
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-icons button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0 5px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background: #dcd6f7;
+            transition: 0.3s;
+            padding-top: 2rem;
+            z-index: 900;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 1rem;
+        }
+
+        .sidebar ul li {
+            padding: 10px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+    </style>
+    <style>
+        body {
+            background:
+                linear-gradient(rgba(240, 240, 240, 0.6), rgba(240, 240, 240, 0.99)),
+                url("image/background.png");
+            background-size: cover;
+            background-attachment: fixed;
+            width: 100%;
+        }
+
+        .preahvihear {
+            font-family: 'Preahvihear', sans-serif;
+        }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 85%;
+            margin: 0 auto;
+            gap: 1.5rem;
+        }
+
+        .form-control {
+            width: 105px;
+            font-size: 18px;
+            display: inline-block;
+            padding: 4px;
+
+            color: none;
+            border: none;
+            background-color: transparent;
+            opacity: 70%;
+            border-radius: 28px;
+        }
+
+        .frame-text {
+            padding: 10px;
+            background-color: #FBF5DD;
+            font-size: 16px;
+            box-sizing: border-box;
+
+        }
+
+        .info {
+            display: inline-block;
+        }
+
+        .left-column {
+            flex: 0 0 58%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: -2rem;
+        }
+        .right-column {
+            flex: 0 0 40%;
+            margin-top: 40px;
+            margin-right: 90px;
+            margin-bottom: auto;
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .profile-card {
+            padding: 2rem;
+            border-radius: 20px;
+            width: 600px;
+        }
+
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            background: #ddd;
+            border-radius: 50%;
+        }
+
+        .info h2 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .location,
+        .about-me {
+            margin-top: 0.5rem;
+        }
+
+        .category-title {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .category {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: #9EE3D7;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            border: 1px solid black;
+            width: 171px;
+            height: 58px;
+        }
+
+        .category-tag {
+            background: #9EE3D7;
+            padding-top: 2px;
+            border-radius: 2rem;
+            border: 1px solid black;
+            width: 86px;
+            height: 29px;
+            text-align: center;
+
+        }
+
+        /* Works展示 */
+        .works-title {
+            margin-top: -10px;
+            font-size: 1.8rem;
+        }
+
+        .works-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 0rem;
+        }
+
+        .image-upload {
+            width: 324px;
+            height: 216px;
+            background-color: #B4DBD4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        #plusButton {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #263238;
+            color: white;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .category-blocks {
+            display: flex;
+            margin-left: 10px;
+        }
+
+        .category-blocks .category-block {
+            background-color: #a5d8ef;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin-left: 5px;
+        }
+
+        .work-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            width: 300px;
+            text-align: center;
+        }
+
+        .work-card img {
+            width: 100%;
+            border-radius: 1rem;
+        }
+
+        .price {
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+
+        /* Price List */
+        .price-list {
+            background: rgba(255, 184, 108, 0.8);
+            border-radius: 1rem;
+            padding: 7dvi 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            margin-top: 90px;
+            width: 499.8px;
+            height: 100px;
+            padding-top: 30px;
+        }
+
+        .pricelist-table,
+        .information-section {
+            padding-top: 70px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .table-row {
+            display: flex;
+            background-color: #F3F0D0;
+            opacity: 62%;
+        }
+
+        .table-cell {
+            flex: 1;
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        .table-cell input {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #addRow {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background-color: #263238;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .price-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            margin-top: auto;
+        }
+
+        .background-title {
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .background-note {
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 0.2rem;
+        }
+
+        .information-section h2 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .information-box {
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .information-box textarea {
+            width: 100%;
+            height: 200px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            background-color: #FFF9E8;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .save-button,
+        .clear-button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            width: 241px;
+            height: 56px;
+
+
+        }
+
+        .save-button {
+            background-color: #6DD3C0;
+            color: #FFFFFF;
+            font: 1em sans-serif;
+            border: none;
+
+        }
+
+        .save-button:active {
+            border: 1px solid black;
+        }
+    </style>
+
+
+
+
+</head>
+
+<body class="bg-light py-4">
+    <!-- Navigation Bar -->
+    <header class="d-flex align-items-center justify-content-between px-3">
+        <button class="menu-btn" onclick="toggleMenu()"><i class="bi bi-list"></i></button>
+        <div class="logo-wrapper">
+            <h1 class="logo">
+                <span class="logo-top">ART</span>
+                <span class="logo-bottom">COMM.</span>
+            </h1>
+        </div>
+
+        <div class="nav-icons d-flex align-items-center">
+            <button><a href="/search"><i class="bi bi-search"></i></a></button>
+            <h4>|</h4>
+            <div class="dropdown">
+                <button class="btn btn-outline-dark" type="button" id="langDropdown" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    EN
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="langDropdown">
+                    <li><a class="dropdown-item lang-option" data-lang="en" href="#">English (EN)</a></li>
+                    <li><a class="dropdown-item lang-option" data-lang="th" href="#">Thai (TH)</a></li>
+                </ul>
+            </div>
+            <button><i class="bi bi-heart-half"></i></button>
+            <button><i class="bi bi-envelope-fill"></i></button>
+            <button class="bi bi-person-circle dropdown-toggle" aria-expanded="false">
+            </button>
+    </header>
+
+    <!-- Sidebar Menu -->
+    <aside class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="toggleMenu()"></button>
+        <ul>
+            <li><a href="/home" data-en="HOME" data-th="หน้าแรก">HOME</a></li>
+            <li><a href="/product" data-en="PRODUCT&SERVICE" data-th="สินค้าและบริการ">PRODUCT&SERVICE</a></li>
+            <li><a href="/team" data-en="TEAM" data-th="ทีม">TEAM</a></li>
+        </ul>
+    </aside>
+    <section class="content-wrapper preahvihear" style="margin-top: 60px; ">
+        <form id="artistForm">
+            <div class="left-column">
+                <section class="profile-container">
+
+                    <div class="profile-card">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img src="/image/User.png" alt="User Avatar"
+                                    style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+                            </div>
+                            <div class="info">
+                                <label for="name" style="  padding-left: 5px; font-size: 30px;  "></label>
+                                <input type="text" id="name" style="background-color: transparent; border: none;
+                            font-size: 30px; color: #000000;" autocomplete="name" placeholder="Artist"><br>
+                                <label for="name"
+                                    style=" display: inline-block; padding-left: 5px; font-size: 30px;" ></label><br>
+
+                                <label for="country" class="bi bi-geo-alt fs-3 "> </label><span
+                                    style=" float: none; "></span>
+                                <select id="country" name="Country" class="form-control" autocomplete="country" >
+                                    <option>Country</option>
+                                    <option value="Afghanistan">Afghanistan</option>
+                                    <option value="Åland Islands">Åland Islands</option>
+                                    <option value="Albania">Albania</option>
+                                    <option value="Algeria">Algeria</option>
+                                    <option value="American Samoa">American Samoa</option>
+                                    <option value="Andorra">Andorra</option>
+                                    <option value="Angola">Angola</option>
+                                    <option value="Anguilla">Anguilla</option>
+                                    <option value="Antarctica">Antarctica</option>
+                                    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                    <option value="Argentina">Argentina</option>
+                                    <option value="Armenia">Armenia</option>
+                                    <option value="Aruba">Aruba</option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Austria">Austria</option>
+                                    <option value="Azerbaijan">Azerbaijan</option>
+                                    <option value="Bahamas">Bahamas</option>
+                                    <option value="Bahrain">Bahrain</option>
+                                    <option value="Bangladesh">Bangladesh</option>
+                                    <option value="Barbados">Barbados</option>
+                                    <option value="Belarus">Belarus</option>
+                                    <option value="Belgium">Belgium</option>
+                                    <option value="Belize">Belize</option>
+                                    <option value="Benin">Benin</option>
+                                    <option value="Bermuda">Bermuda</option>
+                                    <option value="Bhutan">Bhutan</option>
+                                    <option value="Bolivia">Bolivia</option>
+                                    <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                                    <option value="Botswana">Botswana</option>
+                                    <option value="Bouvet Island">Bouvet Island</option>
+                                    <option value="Brazil">Brazil</option>
+                                    <option value="British Indian Ocean Territory">British Indian Ocean Territory
+                                    </option>
+                                    <option value="Brunei Darussalam">Brunei Darussalam</option>
+                                    <option value="Bulgaria">Bulgaria</option>
+                                    <option value="Burkina Faso">Burkina Faso</option>
+                                    <option value="Burundi">Burundi</option>
+                                    <option value="Cambodia">Cambodia</option>
+                                    <option value="Cameroon">Cameroon</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="Cape Verde">Cape Verde</option>
+                                    <option value="Cayman Islands">Cayman Islands</option>
+                                    <option value="Central African Republic">Central African Republic</option>
+                                    <option value="Chad">Chad</option>
+                                    <option value="Chile">Chile</option>
+                                    <option value="China">China</option>
+                                    <option value="Christmas Island">Christmas Island</option>
+                                    <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                                    <option value="Colombia">Colombia</option>
+                                    <option value="Comoros">Comoros</option>
+                                    <option value="Congo">Congo</option>
+                                    <option value="Congo, The Democratic Republic of The">Congo, The Democratic Republic
+                                        of
+                                        The</option>
+                                    <option value="Cook Islands">Cook Islands</option>
+                                    <option value="Costa Rica">Costa Rica</option>
+                                    <option value="Cote D'ivoire">Cote D'ivoire</option>
+                                    <option value="Croatia">Croatia</option>
+                                    <option value="Cuba">Cuba</option>
+                                    <option value="Cyprus">Cyprus</option>
+                                    <option value="Czech Republic">Czech Republic</option>
+                                    <option value="Denmark">Denmark</option>
+                                    <option value="Djibouti">Djibouti</option>
+                                    <option value="Dominica">Dominica</option>
+                                    <option value="Dominican Republic">Dominican Republic</option>
+                                    <option value="Ecuador">Ecuador</option>
+                                    <option value="Egypt">Egypt</option>
+                                    <option value="El Salvador">El Salvador</option>
+                                    <option value="Equatorial Guinea">Equatorial Guinea</option>
+                                    <option value="Eritrea">Eritrea</option>
+                                    <option value="Estonia">Estonia</option>
+                                    <option value="Ethiopia">Ethiopia</option>
+                                    <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+                                    <option value="Faroe Islands">Faroe Islands</option>
+                                    <option value="Fiji">Fiji</option>
+                                    <option value="Finland">Finland</option>
+                                    <option value="France">France</option>
+                                    <option value="French Guiana">French Guiana</option>
+                                    <option value="French Polynesia">French Polynesia</option>
+                                    <option value="French Southern Territories">French Southern Territories</option>
+                                    <option value="Gabon">Gabon</option>
+                                    <option value="Gambia">Gambia</option>
+                                    <option value="Georgia">Georgia</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="Ghana">Ghana</option>
+                                    <option value="Gibraltar">Gibraltar</option>
+                                    <option value="Greece">Greece</option>
+                                    <option value="Greenland">Greenland</option>
+                                    <option value="Grenada">Grenada</option>
+                                    <option value="Guadeloupe">Guadeloupe</option>
+                                    <option value="Guam">Guam</option>
+                                    <option value="Guatemala">Guatemala</option>
+                                    <option value="Guernsey">Guernsey</option>
+                                    <option value="Guinea">Guinea</option>
+                                    <option value="Guinea-bissau">Guinea-bissau</option>
+                                    <option value="Guyana">Guyana</option>
+                                    <option value="Haiti">Haiti</option>
+                                    <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands
+                                    </option>
+                                    <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+                                    <option value="Honduras">Honduras</option>
+                                    <option value="Hong Kong">Hong Kong</option>
+                                    <option value="Hungary">Hungary</option>
+                                    <option value="Iceland">Iceland</option>
+                                    <option value="India">India</option>
+                                    <option value="Indonesia">Indonesia</option>
+                                    <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                                    <option value="Iraq">Iraq</option>
+                                    <option value="Ireland">Ireland</option>
+                                    <option value="Isle of Man">Isle of Man</option>
+                                    <option value="Israel">Israel</option>
+                                    <option value="Italy">Italy</option>
+                                    <option value="Jamaica">Jamaica</option>
+                                    <option value="Japan">Japan</option>
+                                    <option value="Jersey">Jersey</option>
+                                    <option value="Jordan">Jordan</option>
+                                    <option value="Kazakhstan">Kazakhstan</option>
+                                    <option value="Kenya">Kenya</option>
+                                    <option value="Kiribati">Kiribati</option>
+                                    <option value="Korea, Democratic People's Republic of">Korea, Democratic People's
+                                        Republic of</option>
+                                    <option value="Korea, Republic of">Korea, Republic of</option>
+                                    <option value="Kuwait">Kuwait</option>
+                                    <option value="Kyrgyzstan">Kyrgyzstan</option>
+                                    <option value="Lao People's Democratic Republic">Lao People's Democratic Republic
+                                    </option>
+                                    <option value="Latvia">Latvia</option>
+                                    <option value="Lebanon">Lebanon</option>
+                                    <option value="Lesotho">Lesotho</option>
+                                    <option value="Liberia">Liberia</option>
+                                    <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+                                    <option value="Liechtenstein">Liechtenstein</option>
+                                    <option value="Lithuania">Lithuania</option>
+                                    <option value="Luxembourg">Luxembourg</option>
+                                    <option value="Macao">Macao</option>
+                                    <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former
+                                        Yugoslav Republic of</option>
+                                    <option value="Madagascar">Madagascar</option>
+                                    <option value="Malawi">Malawi</option>
+                                    <option value="Malaysia">Malaysia</option>
+                                    <option value="Maldives">Maldives</option>
+                                    <option value="Mali">Mali</option>
+                                    <option value="Malta">Malta</option>
+                                    <option value="Marshall Islands">Marshall Islands</option>
+                                    <option value="Martinique">Martinique</option>
+                                    <option value="Mauritania">Mauritania</option>
+                                    <option value="Mauritius">Mauritius</option>
+                                    <option value="Mayotte">Mayotte</option>
+                                    <option value="Mexico">Mexico</option>
+                                    <option value="Micronesia, Federated States of">Micronesia, Federated States of
+                                    </option>
+                                    <option value="Moldova, Republic of">Moldova, Republic of</option>
+                                    <option value="Monaco">Monaco</option>
+                                    <option value="Mongolia">Mongolia</option>
+                                    <option value="Montenegro">Montenegro</option>
+                                    <option value="Montserrat">Montserrat</option>
+                                    <option value="Morocco">Morocco</option>
+                                    <option value="Mozambique">Mozambique</option>
+                                    <option value="Myanmar">Myanmar</option>
+                                    <option value="Namibia">Namibia</option>
+                                    <option value="Nauru">Nauru</option>
+                                    <option value="Nepal">Nepal</option>
+                                    <option value="Netherlands">Netherlands</option>
+                                    <option value="Netherlands Antilles">Netherlands Antilles</option>
+                                    <option value="New Caledonia">New Caledonia</option>
+                                    <option value="New Zealand">New Zealand</option>
+                                    <option value="Nicaragua">Nicaragua</option>
+                                    <option value="Niger">Niger</option>
+                                    <option value="Nigeria">Nigeria</option>
+                                    <option value="Niue">Niue</option>
+                                    <option value="Norfolk Island">Norfolk Island</option>
+                                    <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                                    <option value="Norway">Norway</option>
+                                    <option value="Oman">Oman</option>
+                                    <option value="Pakistan">Pakistan</option>
+                                    <option value="Palau">Palau</option>
+                                    <option value="Palestinian Territory, Occupied">Palestinian Territory, Occupied
+                                    </option>
+                                    <option value="Panama">Panama</option>
+                                    <option value="Papua New Guinea">Papua New Guinea</option>
+                                    <option value="Paraguay">Paraguay</option>
+                                    <option value="Peru">Peru</option>
+                                    <option value="Philippines">Philippines</option>
+                                    <option value="Pitcairn">Pitcairn</option>
+                                    <option value="Poland">Poland</option>
+                                    <option value="Portugal">Portugal</option>
+                                    <option value="Puerto Rico">Puerto Rico</option>
+                                    <option value="Qatar">Qatar</option>
+                                    <option value="Reunion">Reunion</option>
+                                    <option value="Romania">Romania</option>
+                                    <option value="Russian Federation">Russian Federation</option>
+                                    <option value="Rwanda">Rwanda</option>
+                                    <option value="Saint Helena">Saint Helena</option>
+                                    <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                                    <option value="Saint Lucia">Saint Lucia</option>
+                                    <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                                    <option value="Saint Vincent and The Grenadines">Saint Vincent and The Grenadines
+                                    </option>
+                                    <option value="Samoa">Samoa</option>
+                                    <option value="San Marino">San Marino</option>
+                                    <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                                    <option value="Saudi Arabia">Saudi Arabia</option>
+                                    <option value="Senegal">Senegal</option>
+                                    <option value="Serbia">Serbia</option>
+                                    <option value="Seychelles">Seychelles</option>
+                                    <option value="Sierra Leone">Sierra Leone</option>
+                                    <option value="Singapore">Singapore</option>
+                                    <option value="Slovakia">Slovakia</option>
+                                    <option value="Slovenia">Slovenia</option>
+                                    <option value="Solomon Islands">Solomon Islands</option>
+                                    <option value="Somalia">Somalia</option>
+                                    <option value="South Africa">South Africa</option>
+                                    <option value="South Georgia and The South Sandwich Islands">South Georgia and The
+                                        South
+                                        Sandwich Islands</option>
+                                    <option value="Spain">Spain</option>
+                                    <option value="Sri Lanka">Sri Lanka</option>
+                                    <option value="Sudan">Sudan</option>
+                                    <option value="Suriname">Suriname</option>
+                                    <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+                                    <option value="Swaziland">Swaziland</option>
+                                    <option value="Sweden">Sweden</option>
+                                    <option value="Switzerland">Switzerland</option>
+                                    <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                                    <option value="Taiwan">Taiwan</option>
+                                    <option value="Tajikistan">Tajikistan</option>
+                                    <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
+                                    <option value="Thailand">Thailand</option>
+                                    <option value="Timor-leste">Timor-leste</option>
+                                    <option value="Togo">Togo</option>
+                                    <option value="Tokelau">Tokelau</option>
+                                    <option value="Tonga">Tonga</option>
+                                    <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                                    <option value="Tunisia">Tunisia</option>
+                                    <option value="Turkey">Turkey</option>
+                                    <option value="Turkmenistan">Turkmenistan</option>
+                                    <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                                    <option value="Tuvalu">Tuvalu</option>
+                                    <option value="Uganda">Uganda</option>
+                                    <option value="Ukraine">Ukraine</option>
+                                    <option value="United Arab Emirates">United Arab Emirates</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="United States">United States</option>
+                                    <option value="United States Minor Outlying Islands">United States Minor Outlying
+                                        Islands</option>
+                                    <option value="Uruguay">Uruguay</option>
+                                    <option value="Uzbekistan">Uzbekistan</option>
+                                    <option value="Vanuatu">Vanuatu</option>
+                                    <option value="Venezuela">Venezuela</option>
+                                    <option value="Viet Nam">Viet Nam</option>
+                                    <option value="Virgin Islands, British">Virgin Islands, British</option>
+                                    <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                                    <option value="Wallis and Futuna">Wallis and Futuna</option>
+                                    <option value="Western Sahara">Western Sahara</option>
+                                    <option value="Yemen">Yemen</option>
+                                    <option value="Zambia">Zambia</option>
+                                    <option value="Zimbabwe">Zimbabwe</option>
+                                </select>
+                                <label for="language" class="bi bi-chat-text fs-3  "> </label><span
+                                    style=" float: none; margin-top: 5px;"></span>
+                                <select id="language" name="Language" class="form-control ">
+                                    <option>Language</option>
+                                    <option value="af">Afrikaans</option>
+                                    <option value="sq">Albanian - (Shqip)</option>
+                                    <option value="am">Amharic - (አማርኛ)</option>
+                                    <option value="ar">Arabic - (العربية)</option>
+                                    <option value="an">Aragonese - (Aragonés)</option>
+                                    <option value="hy">Armenian - (Հայերեն)</option>
+                                    <option value="ast">Asturian - (Asturianu)</option>
+                                    <option value="ay">Aymara - (Aymar aru)</option>
+                                    <option value="az">Azerbaijani - (Azərbaycan dili)</option>
+                                    <option value="eu">Basque - (Euskara)</option>
+                                    <option value="be">Belarusian - (Беларуская)</option>
+                                    <option value="bn">Bengali - (বাংলা)</option>
+                                    <option value="brx">Bodo - (बर')</option>
+                                    <option value="bs">Bosnian - (Bosanski)</option>
+                                    <option value="br">Breton - (Brezhoneg)</option>
+                                    <option value="bg">Bulgarian - (Български)</option>
+                                    <option value="ca">Catalan - (Català)</option>
+                                    <option value="ckb">Central - Kurdish (کوردی)</option>
+                                    <option value="ce">Chechen (Нохчийн мотт)</option>
+                                    <option value="zh">Chinese (中文)</option>
+                                    <option value="zh-HK">Chinese Hong Kong - (中文 - 香港)</option>
+                                    <option value="zh-CN">Chinese Simplified - (中文简体)</option>
+                                    <option value="zh-TW">Chinese Traditional - (中文繁體)</option>
+                                    <option value="co">Corsican - (Corsu)</option>
+                                    <option value="hr">Croatian - (Hrvatski)</option>
+                                    <option value="cs">Czech - (Čeština)</option>
+                                    <option value="da">Danish - (Dansk)</option>
+                                    <option value="dv">Dhivehi - (ދިވެހި)</option>
+                                    <option value="nl">Dutch (Nederlands)</option>
+                                    <option value="dz">Dzongkha (རྫོང་ཁ)</option>
+                                    <option value="en">English</option>
+                                    <option value="en-AU">English (Australia)</option>
+                                    <option value="en-CA">English (Canada)</option>
+                                    <option value="en-IN">English (India)</option>
+                                    <option value="en-NZ">English (New Zealand)</option>
+                                    <option value="en-ZA">English (South Africa)</option>
+                                    <option value="en-GB">English (United Kingdom)</option>
+                                    <option value="en-US">English (United States)</option>
+                                    <option value="eo">Esperanto</option>
+                                    <option value="et">Estonian (Eesti)</option>
+                                    <option value="ee">Ewe (Eʋegbe)</option>
+                                    <option value="fo">Faroese - (Føroyskt)</option>
+                                    <option value="fil">Filipino (Wikang Filipino)</option>
+                                    <option value="fi">Finnish (Suomi)</option>
+                                    <option value="fr">French (Français)</option>
+                                    <option value="fr-CA">French Canada - (Français Canada)</option>
+                                    <option value="fr-FR">French France - (Français France)</option>
+                                    <option value="fr-CH">French Switzerland - (Français Suisse)</option>
+                                    <option value="gl">Galician - (Galego)</option>
+                                    <option value="ka">Georgian - (ქართული)</option>
+                                    <option value="de">German - (Deutsch)</option>
+                                    <option value="de-AT">German Austria - (Deutsch Österreich)</option>
+                                    <option value="de-DE">German Germany - (Deutsch Deutschland)</option>
+                                    <option value="de-LI">German Liechtenstein - (Deutsch Liechtenstein)</option>
+                                    <option value="de-CH">German Switzerland - (Deutsch Schweiz)</option>
+                                    <option value="el">Greek - (Ελληνικά)</option>
+                                    <option value="gn">Guarani - (Avañe'ẽ)</option>
+                                    <option value="gu">Gujarati - (ગુજરાતી)</option>
+                                    <option value="ha">Hausa - (هَوُسَ)</option>
+                                    <option value="haw">Hawaiian - (ʻŌlelo Hawaiʻi)</option>
+                                    <option value="he">Hebrew - (עברית)</option>
+                                    <option value="hi">Hindi - (हिन्दी)</option>
+                                    <option value="hu">Hungarian - (Magyar)</option>
+                                    <option value="is">Icelandic - (Íslenska)</option>
+                                    <option value="id">Indonesian - (Bahasa Indonesia)</option>
+                                    <option value="ia">Interlingua</option>
+                                    <option value="iu">Inuktitut - (ᐃᓄᒃᑎᑐᑦ)</option>
+                                    <option value="ga">Irish - (Gaeilge)</option>
+                                    <option value="it">Italian - (Italiano)</option>
+                                    <option value="it-IT">Italian Italy - (Italiano Italia)</option>
+                                    <option value="it-CH">Italian Switzerland - (Italiano - Svizzera)</option>
+                                    <option value="ja">Japanese - (日本語)</option>
+                                    <option value="kl">Kalaallisut - (Kalaallisut)</option>
+                                    <option value="kn">Kannada - (ಕನ್ನಡ)</option>
+                                    <option value="ks">Kashmiri - (कॉशुर / كٲشُر)</option>
+                                    <option value="kk">Kazakh - (Қазақ тілі)</option>
+                                    <option value="km">Khmer - (ខ្មែរ)</option>
+                                    <option value="rw">Kinyarwanda - (Ikinyarwanda)</option>
+                                    <option value="ko">Korean - (한국어)</option>
+                                    <option value="ku">Kurdish - (Kurdî)</option>
+                                    <option value="ky">Kyrgyz - (Кыргызча)</option>
+                                    <option value="lo">Lao - (ລາວ)</option>
+                                    <option value="la">Latin - (Latina)</option>
+                                    <option value="lv">Latvian - (Latviešu)</option>
+                                    <option value="ln">Lingala - (Lingála)</option>
+                                    <option value="lt">Lithuanian - (Lietuvių)</option>
+                                    <option value="lg">Luganda - (Luganda)</option>
+                                    <option value="lb">Luxembourgish - (Lëtzebuergesch)</option>
+                                    <option value="mk">Macedonian - (Македонски)</option>
+                                    <option value="mai">Maithili - (मैथिली)</option>
+                                    <option value="ms">Malay - (Bahasa Melayu)</option>
+                                    <option value="ml">Malayalam - (മലയാളം)</option>
+                                    <option value="mt">Maltese - (Malti)</option>
+                                    <option value="mni">Manipuri - (ꯃꯅꯤꯄꯨꯔꯤ)</option>
+                                    <option value="mr">Marathi - (मराठी)</option>
+                                    <option value="mn">Mongolian - (Монгол)</option>
+                                    <option value="ne">Nepali - (नेपाली)</option>
+                                    <option value="nso">Northern Sotho - (Sesotho sa Leboa)</option>
+                                    <option value="no">Norwegian (Norsk)</option>
+                                    <option value="nb">Norwegian Bokmål - (Norsk bokmål)</option>
+                                    <option value="nn">Norwegian Nynorsk - (Nynorsk)</option>
+                                    <option value="oc">Occitan</option>
+                                    <option value="or">Oriya - (ଓଡ଼ିଆ)</option>
+                                    <option value="om">Oromo - (Afaan Oromoo)</option>
+                                    <option value="os">Ossetian - (Ирон æвзаг)</option>
+                                    <option value="ps">Pashto - (پښتو)</option>
+                                    <option value="fa">Persian - (فارسی)</option>
+                                    <option value="pl">Polish - (Polski)</option>
+                                    <option value="pt">Portuguese - (Português)</option>
+                                    <option value="pt-BR">Portuguese Brazil - (Português Brasil)</option>
+                                    <option value="pt-PT">Portuguese Portugal - (Português Portugal)</option>
+                                    <option value="pa">Punjabi - (ਪੰਜਾਬੀ)</option>
+                                    <option value="qu">Quechua - (Runa Simi)</option>
+                                    <option value="ro">Romanian - (Română)</option>
+                                    <option value="mo">Romanian Moldova - (Română Moldova)</option>
+                                    <option value="rm">Romansh - (Rumantsch)</option>
+                                    <option value="ru">Russian - (Русский)</option>
+                                    <option value="sm">Samoan - (Gagana Samoa)</option>
+                                    <option value="sat">Santali - (ᱥᱟᱱᱛᱟᱲᱤ)</option>
+                                    <option value="sc">Sardinian - (Sardu)</option>
+                                    <option value="gd">Scottish Gaelic - (Gàidhlig)</option>
+                                    <option value="sr">Serbian - (Српски)</option>
+                                    <option value="sh">Serbo_Croatian - (Srpskohrvatski)</option>
+                                    <option value="sn">Shona - (ChiShona)</option>
+                                    <option value="sd">Sindhi - (سنڌي)</option>
+                                    <option value="si">Sinhala - (සිංහල)</option>
+                                    <option value="sk">Slovak - (Slovenčina)</option>
+                                    <option value="sl">Slovenian - (Slovenščina)</option>
+                                    <option value="so">Somali - (Soomaali)</option>
+                                    <option value="st">Southern - Sotho (Sesotho)</option>
+                                    <option value="es">Spanish - (Español)</option>
+                                    <option value="es-AR">Spanish Argentina - (Español Argentina)</option>
+                                    <option value="es-419">Spanish Latin America - (Español Latinoamérica)</option>
+                                    <option value="es-MX">Spanish Mexico - (Español México)</option>
+                                    <option value="es-ES">Spanish Spain - (Español España)</option>
+                                    <option value="es-US">Spanish United States - (Español Estados Unidos)</option>
+                                    <option value="su">Sundanese - (Basa Sunda)</option>
+                                    <option value="sw">Swahili - (Kiswahili)</option>
+                                    <option value="sv">Swedish - (Svenska)</option>
+                                    <option value="tg">Tajik - (Тоҷикӣ)</option>
+                                    <option value="ta">Tamil - (தமிழ்)</option>
+                                    <option value="tt">Tatar - (Татар)</option>
+                                    <option value="te">Telugu - (తెలుగు)</option>
+                                    <option value="th">Thai - (ไทย)</option>
+                                    <option value="ti">Tigrinya - (ትግርኛ)</option>
+                                    <option value="to">Tongan - (Lea fakatonga)</option>
+                                    <option value="tn">Tswana - (Setswana)</option>
+                                    <option value="tr">Turkish - (Türkçe)</option>
+                                    <option value="tk">Turkmen - (Türkmençe)</option>
+                                    <option value="tw">Twi - (Twi)</option>
+                                    <option value="udm">Udmurt - (Удмурт кыл)</option>
+                                    <option value="uk">Ukrainian - (Українська)</option>
+                                    <option value="ur">Urdu - (اردو)</option>
+                                    <option value="ug">Uyghur - (ئۇيغۇرچە)</option>
+                                    <option value="uz">Uzbek - (O'zbek)</option>
+                                    <option value="ve">Venda - (Tshivenḓa)</option>
+                                    <option value="vi">Vietnamese - (Tiếng Việt)</option>
+                                    <option value="wa">Walloon - (Walon)</option>
+                                    <option value="cy">Welsh - (Cymraeg)</option>
+                                    <option value="fy">Western Frisian - (Frysk)</option>
+                                    <option value="wo">Wolof - (Wollof)</option>
+                                    <option value="xh">Xhosa - (isiXhosa)</option>
+                                    <option value="yi">Yiddish - (ייִדיש)</option>
+                                    <option value="yo">Yoruba - (Èdè Yorùbá)</option>
+                                    <option value="za">Zhuang - (Saɯ cueŋƅ)</option>
+                                    <option value="zu">Zulu - (isiZulu)</option>
+                                </select>
+                                <label
+                                    style="font-size: 0.7em; font-family: Arial, Helvetica, sans-serif; padding-top: 5px; font-size: 18px; padding-left: 10px;">
+                                    <input id="status" type="checkbox" value="Available" checked> Available
+                                </label><br>
+
+
+                            </div>
+                        </div>
+
+                        <div style="max-width: 600px; padding-top: 10px; position: relative;">
+                            <textarea id="Aboutme" class="form-control frame-text"
+                                style="height: 120px; width: 570px; border: 1px solid #ccc; border-radius: 5px; padding: 40px 8px 8px 8px; box-sizing: border-box; font-family: sans-serif; position: start;">
+                        </textarea>
+                            <span
+                                style="position: absolute; top: 8px; left: 8px; font-weight: bold; color: #000000; font-size: 32px;"
+                                data-en="About me" data-th="เกี่ยวกับฉัน">About
+                                me:</span>
+                        </div>
+                        <h3 class="category-title" style="font-size: 40px;" data-en="Category" data-th="ประเภท">Category
+                        </h3>
+                        <div class="category" style="text-align: center;">
+                            <div style="display: inline-flex; align-items: center; gap: 8px;">
+                                <select id="category" name="Categories" class="bi bi-plus-circle-fill fs-5 skill-tag"
+                                    style="color: #326373; cursor: pointer; padding-top: 9px; ">
+                                    <option value="All">All</option>
+                                    <option value="Anime Style">Anime Style</option>
+                                    <option value="Realism">Realism</option>
+                                    <option value="Cartoon">Cartoon</option>
+                                    <option value="Pixel Art">Pixel Art</option>
+                                    <option value="Chibi">Chibi</option>
+                                </select>
+
+                                <div id="container" style="display: inline-flex; gap: 8px; "></div>
+
+                            </div>
+                        </div>
+
+                </section>
+                <section class="main-container" style="display: flex; gap: 20px;"></section>
+                <section class="works">
+                    <h3 class="works-title" style="font-size: 40px;" data-en="My Works" data-th="ผลงาน">My Works</h3>
+
+                    <!-- Images + Upload Button Wrapper -->
+                    <div id="preview-container" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
+                        <!-- "Add" Button -->
+                        <div class="image-upload"
+                            style="width: 324px; height: 216px; background-color: #B4DBD4; display: flex; justify-content: center; align-items: center; border-radius: 8px; cursor: pointer; position: relative; overflow: hidden;">
+
+                            <input type="url" id="photoURL" name="photoURL" class="form-control"
+                                placeholder="Enter URL of artist's photo">
+
+                        </div>
+                </section>
+    </section>
+
+
+    <!-- 右边 PriceList -->
+    <div class="right-column">
+        <section class="price-list" style="justify-content: flex-end;">
+            <div class="table-row header-row">
+                <div class="table-cell" style="font-family: 'Preahvihear', sans-serif;" data-en="base price"
+                    data-th="ราคาเริ่มต้น">base price</div>
+                <div class="table-cell"><input id="baseprice" type="text"></div>
+            </div>
+        </section>
+        <div class="button-container ">
+            <button type="submit" class="save-button  "
+                style="--bs-body-font-family: 'Roboto', sans-serif;font-weight: bold;font-size: 48px;margin-top: 20px; padding-bottom: 60px;"
+                data-en="Save" data-th="บันทึก">Save</button>
+        </div>
+    </div>
+    </form>
+    </section>
+    <script type="text/javascript" src="/js/script.js"></script>
+</body>
+
+</html>

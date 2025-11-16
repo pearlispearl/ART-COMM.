@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <title>Search Results - ArtComm</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Preahvihear&display=swap" rel="stylesheet">
+
+    <style>
+        header {
+            background-color: #9cd0c0c5;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-icons a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .nav-icons a:hover {
+            color: inherit;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 auto;
+            line-height: 0.6;
+        }
+
+        .logo-top {
+            display: block;
+            font-weight: 600;
+            justify-content: left;
+            align-items: left;
+        }
+
+        .logo-bottom {
+            display: block;
+            font-weight: 800;
+            justify-content: left;
+            align-items: left;
+        }
+
+        .menu-btn,
+        .close-btn {
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-icons button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0 5px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background: #dcd6f7;
+            transition: 0.3s;
+            padding-top: 2rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 1rem;
+        }
+
+        .sidebar ul li {
+            padding: 10px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        body {
+            background:
+                linear-gradient(rgba(240, 240, 240, 0.6), rgba(240, 240, 240, 0.99)),
+                url("/image/background.png");
+            background-size: cover;
+            background-attachment: fixed;
+            width: 100%;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding: 0 2rem 2rem 2rem;
+            margin-top: 100px;
+
+        }
+
+        .card {
+            background-color: transparent;
+            border: transparent;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .card img {
+            max-width: 300px;
+            max-height: 200px;
+            border: 2px solid #ecf0f1;
+            margin-bottom: 0.5px;
+        }
+
+        @media (max-width: 992px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card p {
+            margin: 0.3px 0;
+            font-family: Preahvihear;
+        }
+
+        .artist-info h3 {
+            margin-top: 15px;
+        }
+
+        .view-button {
+            text-decoration: none;
+            color: black;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header class="d-flex align-items-center justify-content-between px-3">
+        <button class="menu-btn" onclick="toggleMenu()"><i class="bi bi-list"></i></button>
+        <div class="logo-wrapper">
+            <h1 class="logo">
+                <span class="logo-top">ART</span>
+                <span class="logo-bottom">COMM.</span>
+            </h1>
+        </div>
+
+        <div class="nav-icons d-flex align-items-center">
+            <button><a href="/search"><i class="bi bi-search"></i></a></button>
+            <h4>|</h4>
+            <div class="dropdown">
+                <button class="btn btn-outline-dark" type="button" id="langDropdown" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    EN
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="langDropdown">
+                    <li><a class="dropdown-item lang-option" data-lang="en" href="#">English (EN)</a></li>
+                    <li><a class="dropdown-item lang-option" data-lang="th" href="#">Thai (TH)</a></li>
+                </ul>
+            </div>
+            <button><i class="bi bi-heart-half"></i></button>
+            <button><i class="bi bi-envelope-fill"></i></button>
+            <button class="bi bi-person-circle dropdown-toggle" aria-expanded="false">
+            </button>
+
+    </header>
+    <!-- End Navigation Bar -->
+    <!-- Sidebar Menu -->
+    <aside class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="toggleMenu()"></button>
+        <ul>
+            <li><a href="/home" data-en="HOME" data-th="หน้าแรก">HOME</a></li>
+            <li><a href="/product" data-en="PRODUCT&SERVICE" data-th="สินค้าและบริการ">PRODUCT&SERVICE</a></li>
+            <li><a href="/team" data-en="TEAM" data-th="ทีม">TEAM</a></li>
+        </ul>
+    </aside>
+    <!-- has Change -->
+    <main role="main" style="font-family: 'Preahvihear', sans-serif ; margin-top: 15px;">
+        <div class="gallery" id="container"></div>
+    </main>
+    <script type="text/javascript" src="/js/script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome - ArtComm</title>
+  <link rel="stylesheet" href="/css/welcome_styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- edit/delete font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Preahvihear&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <header class="d-flex align-items-center justify-content-between px-3">
+    <button class="menu-btn" onclick="toggleMenu()"><i class="bi bi-list"></i></button>
+    <div class="logo-wrapper">
+      <h1 class="logo">
+        <span class="logo-top">ART</span>
+        <span class="logo-bottom">COMM.</span>
+      </h1>
+    </div>
+
+    <div class="nav-icons d-flex align-items-center">
+      <button><a href="/search"><i class="bi bi-search"></i></a></button>
+      <h4>|</h4>
+      <div class="dropdown">
+        <button class="btn btn-outline-dark" type="button" id="langDropdown" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          EN
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="langDropdown">
+          <li><a class="dropdown-item lang-option" data-lang="en" href="#">English (EN)</a></li>
+          <li><a class="dropdown-item lang-option" data-lang="th" href="#">Thai (TH)</a></li>
+        </ul>
+      </div>
+      <button><i class="bi bi-heart-half"></i></button>
+      <button><i class="bi bi-envelope-fill"></i></button>
+      <button class="bi bi-person-circle dropdown-toggle" aria-expanded="false">
+      </button>
+  </header>
+
+  <!-- Sidebar Menu -->
+  <aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="toggleMenu()"></button>
+    <ul>
+      <li><a href="/home" data-en="HOME" data-th="หน้าแรก">HOME</a></li>
+      <li><a href="/product" data-en="PRODUCT&SERVICE" data-th="สินค้าและบริการ">PRODUCT&SERVICE</a></li>
+      <li><a href="/team" data-en="TEAM" data-th="ทีม">TEAM</a></li>
+    </ul>
+  </aside>
+  <div class="background">
+
+    <div class="welcome-container">
+      <div class="welcome-left-panel">
+        <img src="/image/Login_Page/login_image.png" alt="Welcome visual" />
+      </div>
+      <div class="welcome-right-panel">
+        <div class="welcome-text">
+          <h1><span data-en="Welcome back" data-th="ยินดีต้อนรับ">Welcome back</span> <span class="username"
+              id="username-placeholder">👋</span>,</h1>
+          <p data-en="Enjoy your work &amp; Have a nice day!" data-th="ขอให้มีความสุขกับงาน &amp; มีวันที่ดีนะ!">Enjoy
+            your work &amp; Have a nice day!</p>
+        </div>
+        <a href="/product" class="welcome-btn" data-en-line1="Go to" data-en-line2="Product and Service"
+          data-th-line1="เข้าสู่หน้า" data-th-line2="สินค้าและบริการ">Go to<br>Product and Service</a>
+      </div>
+    </div>
+
+  </div>
+  </div>
+  <script type="text/javascript" src="/js/script.js"></script>
+
+</body>
+
+</html>

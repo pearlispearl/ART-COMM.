@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product & Service Management - ArtComm</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- edit/delete font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Preahvihear&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejugothic.css">
+  <!-- nav part -->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    header {
+      background-color: #9cd0c0c5;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .nav-icons a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .nav-icons a:hover {
+      color: inherit;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0 auto;
+      line-height: 0.6;
+    }
+
+    .logo-top {
+      display: block;
+      font-weight: 600;
+      justify-content: left;
+      align-items: left;
+    }
+
+    .logo-bottom {
+      display: block;
+      font-weight: 800;
+      justify-content: left;
+      align-items: left;
+    }
+
+    .menu-btn,
+    .close-btn {
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-icons button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 0 5px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: -250px;
+      top: 0;
+      width: 250px;
+      height: 100%;
+      background: #dcd6f7;
+      transition: 0.3s;
+      padding-top: 2rem;
+      z-index: 900;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 1rem;
+    }
+
+    .sidebar ul li {
+      padding: 10px;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    :root {
+      --bs-body-font-family: 'Roboto', snas-serif;
+    }
+
+    .preahvihear {
+      font-family: 'Preahvihear', sans-serif;
+      font-size: 14px;
+    }
+
+    .jejugothic {
+      font-family: 'Jeju Gothic', sans-serif;
+    }
+
+    .form-control {
+      border-left: none;
+      font-size: 32px;
+      font-weight: 400;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+
+    .form-control::placeholder {
+      color: rgba(51, 51, 51, 0.6);
+    }
+
+    .edit-btn {
+      background-color: #FBF5DD;
+      color: #DCA854;
+      font: 1em sans-serif;
+      border: none;
+
+    }
+
+    .delete-btn {
+      background-color: #A6CDC6;
+      color: #1B7178;
+      font: 1em sans-serif;
+      border: none;
+    }
+
+    .edit-btn:hover,
+    .delete-btn:hover {
+      opacity: 0.8;
+      /* Makes the button slightly transparent on hover */
+    }
+
+    body {
+      background:
+        linear-gradient(rgba(240, 240, 240, 0.6), rgba(240, 240, 240, 0.99)),
+        url("image/background.png");
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    .card-image-fixed {
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 25px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .card-text-container {
+      width: 325px;
+      box-sizing: border-box;
+      padding: 0 15px;
+    }
+  </style>
+
+</head>
+
+<body class=" bg-light py-4">
+  <!-- Navigation Bar -->
+  <header class="d-flex align-items-center justify-content-between px-3">
+    <button class="menu-btn" onclick="toggleMenu()"><i class="bi bi-list"></i></button>
+    <div class="logo-wrapper">
+      <h1 class="logo">
+        <span class="logo-top">ART</span>
+        <span class="logo-bottom">COMM.</span>
+      </h1>
+    </div>
+
+    <div class="nav-icons d-flex align-items-center">
+      <button><a href="/search"><i class="bi bi-search"></i></a></button>
+      <h4>|</h4>
+      <div class="dropdown">
+        <button class="btn btn-outline-dark" type="button" id="langDropdown" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          EN
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="langDropdown">
+          <li><a class="dropdown-item lang-option" data-lang="en" href="#">English (EN)</a></li>
+          <li><a class="dropdown-item lang-option" data-lang="th" href="#">Thai (TH)</a></li>
+        </ul>
+      </div>
+      <button><i class="bi bi-heart-half"></i></button>
+      <button><i class="bi bi-envelope-fill"></i></button>
+      <button class="bi bi-person-circle dropdown-toggle" aria-expanded="false">
+      </button>
+  </header>
+
+  <!-- Sidebar Menu -->
+  <aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="toggleMenu()"></button>
+    <ul>
+      <li><a href="/home" data-en="HOME" data-th="หน้าแรก">HOME</a></li>
+      <li><a href="/product" data-en="PRODUCT&SERVICE" data-th="สินค้าและบริการ">PRODUCT&SERVICE</a></li>
+      <li><a href="/team" data-en="TEAM" data-th="ทีม">TEAM</a></li>
+    </ul>
+  </aside>
+  <!-- Header -->
+  <h3 class="mb-4  jejugothic" style="font-size: 40px; margin-left: 65px; margin-top: 60px; "
+    data-en="Product & Service Management" data-th="จัดการสินค้าและบริการ">Product & Service Management</h3>
+  <div class="container">
+    <!-- Form + Buttons -->
+    <div class="row mb-4" style="justify-content: center; margin-top: 90px;">
+      <!-- Buttons (Right) -->
+      <div class="col-md-5 d-flex flex-column justify-content-center align-items-center">
+        <!-- <a href="/Product2.html"> -->
+        <a href="/product_manage" style="text-decoration: none; color: #858585;">
+          <button class="btn btn-custom   mb-4 fw-bold"
+            style=" background-color:#9EE3D7; color: #858585; opacity: 0.8; height: 112px;width: 522px;  padding: 0.5rem 1rem; font-size: 40px; white-space: nowrap; border-radius: 25px;">
+            <i class="bi bi-person-plus-fill " style="color: #1B7178; "></i>
+            <span data-en="Add Product/Service" data-th="เพิ่มสินค้าและบริการ">Add Product/Service</span>
+          </button></a>
+        <!-- </a>  -->
+        </button>
+        </a>
+      </div>
+    </div>
+
+
+
+    <!-- Product Cards -->
+    <label class="  jejugothic" style="font-size: 24px;" data-en="Latest Artist" data-th="ล่าสุด">Latest
+      Artist</label>
+    <div class="row g-4 d-flex flex-wrap justify-content-center" style="margin-top: 10px;"
+      id="latest-artists-container">
+    </div>
+
+
+  </div>
+  </div>
+  <script type="text/javascript" src="/js/script.js"></script>
+
+</body>
+
+</html>
